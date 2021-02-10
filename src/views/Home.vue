@@ -34,14 +34,22 @@ export default {
     this.scene.add(this.cube);
     this.scene.add(this.light);
 
+    window.addEventListener("resize", this.onWindowResize, false);
+
     this.animate();
   },
   methods: {
+    onWindowResize() {
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+
+      this.camera.aspect = window.innerWidth / window.innerHeight;
+      this.camera.updateProjectionMatrix();
+    },
     animate() {
       requestAnimationFrame(this.animate);
 
-      this.cube.rotation.x += 0.02;
-      this.cube.rotation.y += 0.02;
+      this.cube.rotation.x += 0.01;
+      this.cube.rotation.y += 0.01;
 
       this.renderer.render(this.scene, this.camera);
     },
