@@ -1,0 +1,1 @@
+.main{flex-wrap:wrap;padding:20px 0 0 20px}.main,.preview{display:flex;justify-content:center}.preview{align-items:center;width:300px;height:300px;margin-right:20px;margin-bottom:20px;overflow:hidden;border:1px solid #bfccd6;box-shadow:0 2px 12px -2px rgb(0 0 0/15%);transition:all .25s linear}img{width:100%;height:auto;display:block}
