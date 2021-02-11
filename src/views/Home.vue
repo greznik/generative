@@ -48,8 +48,8 @@ export default {
   transition: all 0.25s linear;
 }
 img {
-    width: 100%;
-    height: auto;
-    display: block;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 </style>
