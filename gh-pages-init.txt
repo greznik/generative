@@ -1,0 +1,3 @@
+ВАЖНЫЙ!! Перед запуском следующей команды убедитесь, что вы не зафиксировали .gitignore и vue.config.js.
+Выполните команду:git add dist && git commit -m "Initial dist subtree commit"
+Выполните команду: git subtree push --prefix dist origin gh-pages

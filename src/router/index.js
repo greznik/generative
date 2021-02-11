@@ -9,6 +9,14 @@ const routes = [
     name: "Home",
     component: () => import(/* webpackChunkName: "home" */ "../views/Home.vue"),
   },
+  {
+    path: "/svg_morphing",
+    name: "SvgMorphing",
+    component: () =>
+      import(
+        /* webpackChunkName: "svgMorphing" */ "../scene/svg_morphing/index.vue"
+      ),
+  },
 ];
 
 const router = new VueRouter({

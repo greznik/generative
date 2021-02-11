@@ -1,58 +1,55 @@
 <template>
-  <canvas ref="canvas"></canvas>
+  <main class="main">
+    <div class="preview" v-for="(view, ind) in views" :key="ind">
+      <router-link :to="view.router"
+        ><img src="../assets/preview/test.jpg" alt="test"
+      /></router-link>
+    </div>
+  </main>
 </template>
 
 <script>
-import * as THREE from "three";
+// import svgMorphing from "@/components/svg_morphing";
 export default {
   name: "Home",
   data() {
-    const scene = new THREE.Scene();
-    const renderer = null;
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    const light = new THREE.DirectionalLight(0xffffff);
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshNormalMaterial();
-    const cube = new THREE.Mesh(geometry, material);
-    return { scene, renderer, camera, light, geometry, material, cube };
+    return {
+      views: [
+        { preview: "/test", title: "", action: "", router: "/svg_morphing" },
+        { preview: "", title: "", action: "", router: "" },
+        { preview: "", title: "", action: "", router: "" },
+      ],
+    };
   },
-  mounted() {
-    const $canvas = this.$refs.canvas;
-    this.renderer = new THREE.WebGLRenderer({
-      antialias: true,
-      canvas: $canvas,
-    });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-    this.camera.position.set(0, 0, 2);
-    this.light.position.set(0, 0, 10);
-    this.scene.add(this.cube);
-    this.scene.add(this.light);
-
-    window.addEventListener("resize", this.onWindowResize, false);
-
-    this.animate();
-  },
-  methods: {
-    onWindowResize() {
-      this.renderer.setSize(window.innerWidth, window.innerHeight);
-
-      this.camera.aspect = window.innerWidth / window.innerHeight;
-      this.camera.updateProjectionMatrix();
-    },
-    animate() {
-      requestAnimationFrame(this.animate);
-
-      this.cube.rotation.x += 0.01;
-      this.cube.rotation.y += 0.01;
-
-      this.renderer.render(this.scene, this.camera);
-    },
+  components: {
+    // svgMorfing,
   },
 };
 </script>
+
+<style>
+.main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px 0 0 20px;
+}
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300px;
+  height: 300px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  border: 1px solid #bfccd6;
+  box-shadow: 0 2px 12px -2px rgb(0 0 0 / 15%);
+  transition: all 0.25s linear;
+}
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+</style>

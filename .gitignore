@@ -4,6 +4,7 @@ node_modules
 
 
 # local env files
+.txt
 .env.local
 .env.*.local
 
