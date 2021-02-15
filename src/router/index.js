@@ -14,7 +14,7 @@ const routes = [
     name: "SvgMorphing",
     component: () =>
       import(
-        /* webpackChunkName: "svgMorphing" */ "../scene/svg_morphing/index.vue"
+        /* webpackChunkName: "svgMorphing" */ "../scenes/svg_morphing/index.vue"
       ),
   },
 ];

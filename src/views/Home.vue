@@ -16,8 +16,6 @@ export default {
     return {
       views: [
         { preview: "/test", title: "", action: "", router: "/svg_morphing" },
-        { preview: "", title: "", action: "", router: "" },
-        { preview: "", title: "", action: "", router: "" },
       ],
     };
   },
