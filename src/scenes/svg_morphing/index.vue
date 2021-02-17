@@ -18,8 +18,10 @@ export default {
       3000
     );
     const light = new THREE.DirectionalLight(0xffffff);
-    const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const texture = new THREE.TextureLoader().load("../../assets/svg_morphing");
+    const geometry = new THREE.Geometry();
+    const texture = new THREE.TextureLoader().load(
+      "../../assets/svg_morphing/particle.png"
+    );
     const material = new THREE.PointCloudMaterial({
       size: 5,
       vertexColors: THREE.VertexColors,
@@ -27,7 +29,12 @@ export default {
       alphaTest: 0.5,
     });
     const pointCloud = new THREE.PointCloud(geometry, material);
-    const images = ["img/github.svg", "img/comment.svg", "img/clock.svg"];
+    const images = [
+      "../../assets/svg_morphing/bitcoin.svg",
+      "../../assets/svg_morphing/clock.svg",
+      "../../assets/svg_morphing/github.svg",
+    ];
+    const gallery = [];
     return {
       scene,
       renderer,
@@ -41,24 +48,42 @@ export default {
     };
   },
   mounted() {
+    loadedImages.forEach((el, index) => {
+      this.gallery.push(getArrayFromImage(loadedImages[index]));
+    });
     const canvas = this.$refs.svg;
-    const ctx = canvas.getContext("2d");
+    this.scene.background = new THREE.Color(0xffffff);
+    this.renderer.setPixelRatio(window.devicePixelRatio);
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
       canvas: canvas,
     });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
 
-    this.camera.position.set(0, 0, 2);
-    this.light.position.set(0, 0, 10);
-    this.scene.add(this.light);
+    this.camera = new THREE.PerspectiveCamera(
+      90,
+      window.innerWidth / window.innerHeight,
+      1,
+      3000
+    );
+    this.camera.position.z = 500;
 
     window.addEventListener("resize", this.onWindowResize, false);
 
     this.animate();
-    this.init();
   },
   methods: {
+    galleryImages(gallery) {
+      gallery[0].forEach((el, index) => {
+        this.geometry.vertices.push(
+          new THREE.Vector3(el[0], el[1], Math.random() * 30)
+        );
+        this.geometry.colors.push(
+          new THREE.Color(Math.random(), Math.random(), Math.random())
+        );
+      });
+    },
     loadImages(paths, whenLoaded) {
       let imgs = [];
       paths.forEach((path) => {
